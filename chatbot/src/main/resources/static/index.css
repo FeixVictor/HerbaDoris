@@ -1,0 +1,87 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	background-image: url("leaves.gif");
+	background-color: rgb(242, 252, 243);
+	background-size: contain;
+	background-position: center;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.button-container {
+	text-align: center;
+	padding-top: 50px;
+}
+
+.icon-herbabot {
+	width: 150px;
+	padding-bottom: 20px;
+	animation: slide-up-down 3s ease infinite;
+}
+
+.icon-title {
+	font-size: 80px;
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	color: darkgreen;
+	font-weight: bold;
+	animation: slide-up 3s ease forwards;
+}
+
+.icon-subtitle {
+	font-size: 25px;
+	color: darkgreen;
+	animation: slide-up 3s ease forwards;
+}
+
+h1 {
+	line-height: 32px;
+	letter-spacing: normal;
+	margin: 0px 0px 16px;
+}
+
+button {
+	display: block;
+	width: 150px;
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 15px;
+	cursor: pointer;
+	margin-bottom: 20px;
+	border: 2px solid #212529
+}
+
+button:hover {
+	background-color: #45a049;
+}
+
+@keyframes slide-up {
+	0% {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slide-up-down {
+    0% {
+        transform: translateY(0); /* Começa na posição inicial */
+    }
+    50% {
+        transform: translateY(-8px); /* Move para cima */
+    }
+    100% {
+        transform: translateY(0); /* Retorna à posição inicial */
+    }
+}

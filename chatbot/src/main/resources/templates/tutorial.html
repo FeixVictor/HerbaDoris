@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="tutorial.css">
+</head>
+
+<body>
+
+	<button title="Voltar" id="indexBtn" class="btn btn-primary btn-back"><i class="fas fa-arrow-left"></i></button>
+	
+	<img class="icon-herbabot" src="doris.png">
+	<h1 class="icon-title">HerbaDóris</h1>
+	<h1 class="icon-subtitle">Plantando conhecimento</h1>
+
+	<div class="card">
+		<h2 class="title"></h2>
+		<p class="text"></p>
+	</div>
+	
+	<nav aria-label="Page navigation example">
+	    <ul class="pagination">
+	        </li>
+	        <li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>
+	        <li class="page-item"><a class="page-link" href="#" data-page="2">2</a></li>
+	        <li class="page-item"><a class="page-link" href="#" data-page="3">3</a></li>
+			<li class="page-item"><a class="page-link" href="#" data-page="4">4</a></li>
+			<li class="page-item"><a class="page-link" href="#" data-page="5">5</a></li>
+			<li class="page-item"><a class="page-link" href="#" data-page="6">6</a></li>
+	        </li>
+	    </ul>
+	</nav>
+	
+	<script>
+		const titles = ["1. Dóris",
+						"2. ChatBot",
+						"3. Plantas medicinais e fitoterápicos",
+						"4. Como utilizar?",
+						"5. Como utilizar?",
+						"6. Como utilizar?"];
+		        
+		const texts = ["A Dóris é uma agente pedagógica virtual do tipo conversacional. Seu principal objetivo com os usuários é fornecer o auxílio necessário na aplicação em questão e estabelecer um processo de comunicação agradável e com empatia. A entrada de informações e a resposta entregue podem ocorrer via áudio ou texto.",
+					   "Um chatbot opera através de uma sequência de etapas: Primeiro, ele recebe a entrada do usuário, geralmente uma mensagem de texto. Em seguida, ele utiliza algoritmos de processamento de linguagem natural (NLP) para compreender a mensagem, identificando a intenção por trás dela. Com base nessa intenção, o chatbot recupera ou gera uma resposta apropriada, que é então entregue de volta ao usuário.",
+					   "Buscar informações precisas sobre plantas medicinais e fitoterápicos é crucial por várias razões. Primeiramente, contribui para a segurança do consumidor, evitando efeitos colaterais adversos ou interações medicamentosas indesejadas. Além disso, conhecer corretamente as propriedades medicinais das plantas permite escolher opções mais eficazes de tratamento.",
+					   "Envie Mensagens: Esta etapa envolve o envio de mensagens para o chatbot através da área de entrada de texto disponível na interface. Você pode digitar qualquer coisa que desejar, seja uma pergunta, uma solicitação de informação, uma instrução específica ou apenas uma saudação. O chatbot está programado para compreender e responder a uma variedade de consultas e comandos, então sinta-se à vontade para iniciar a conversa da maneira que preferir.",
+					   "Receba Respostas: Após enviar sua mensagem para o chatbot, ele iniciará o processo de processamento da sua consulta. Utilizando algoritmos avançados de processamento de linguagem natural (NLP), o chatbot analisará o conteúdo da sua mensagem para compreender sua intenção e extrair informações relevantes. Com base nessa análise, o chatbot selecionará ou gerará uma resposta adequada para você",
+					   "Continue a Conversa: Depois de receber a resposta inicial do chatbot, você pode continuar a conversa enviando mais mensagens e interagindo conforme necessário. O chatbot está lá para ajudá-lo, fornecendo assistência contínua e respondendo às suas perguntas da melhor maneira possível. Você pode fazer perguntas adicionais, esclarecer dúvidas, solicitar mais informações ou serviços, ou simplesmente continuar a conversa sobre o tópico inicial."];
+		
+		        // Função para atualizar o conteúdo com base na página selecionada
+				function updateContent(pageNumber) {
+				    const card = document.querySelector('.card');
+					card.style.display = 'none';
+				    card.offsetHeight; // Força o navegador a re-renderizar o elemento
+					card.style.display = 'block'; // Exibe o elemento novamente
+				    document.querySelector('.title').textContent = titles[pageNumber];
+				    document.querySelector('.text').textContent = texts[pageNumber];
+				}
+		
+		        // Atualiza o conteúdo com base na primeira página ao carregar a página
+		        window.addEventListener('DOMContentLoaded', function () {
+		            updateContent(0); // Mostra o conteúdo da primeira página ao carregar a página
+		        });
+		
+		        // Event listener para atualizar o conteúdo quando um link de página é clicado
+		        document.querySelectorAll('.page-link').forEach(function (link) {
+		            link.addEventListener('click', function (event) {
+		                event.preventDefault();
+		                const pageNumber = parseInt(event.target.getAttribute('data-page')) - 1;
+		                updateContent(pageNumber); // Chama a função para atualizar o conteúdo com base na página selecionada
+		            });
+		        });
+				
+				
+			document.getElementById("indexBtn").addEventListener("click", function() {
+					   window.location.href = "/index";
+				});
+					
+	</script>
+</body>
+
+</html>

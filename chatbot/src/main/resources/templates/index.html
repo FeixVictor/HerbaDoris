@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+
+		<img class="icon-herbabot" src="doris.png">
+		<h1 class="icon-title">HerbaDóris</h1>
+		<h2 class="icon-subtitle">Plantando conhecimento</h2>
+
+	<div class="button-container">
+		<button id="iniciarBtn">Iniciar</button>
+		<button id="tutorialBtn">Tutorial</button>
+	</div>
+
+	<script>
+		
+	document.getElementById("iniciarBtn").addEventListener("click", function() {
+	    window.location.href = "/start-chatbot";
+	});
+	
+	document.getElementById("tutorialBtn").addEventListener("click", function() {
+	    window.location.href = "/tutorial";
+	});
+	</script>
+	
+</body>
+</html>

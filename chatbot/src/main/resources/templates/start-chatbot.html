@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="start-chatbot.css">
+</head>
+
+<body>
+    <img class="icon-herbabot" src="doris.png">
+    <h1 class="icon-title">HerbaDóris</h1>
+    <h2 class="icon-subtitle">Plantando conhecimento</h2>
+    <button id="homeBtn" class="btn-home">Página inicial</button>
+    <div class="chat-container">
+        <div class="chat-messages" id="chat-messages">
+            <!-- Mensagens serão adicionadas aqui -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="message-input" placeholder="Digite uma mensagem...">
+            <button id="send-button">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        document.getElementById("homeBtn").addEventListener("click", function () {
+            window.location.href = "/";
+        });
+
+        const boldWords = ["Guaco", "Guaco [Planta]", "Sene [Planta]", "Plantas Medicinais", "Planta Medicinal", "Fitoterápicos", "Fitoterápico", "Não", "Sim",
+						   "Aparelho cardiovascular", "Anti-inflamatórios", "Castanha-da-índia", "Centelha Asiática",
+						   "Videira/Uva", "Pele e mucosas", "Aparelho gastrointestinal", "Estimulantes do apetite",
+						   "Dor articular e muscular", "Aparelho respiratório", "Uso em ginecologia", "Uso em hemorroidas",
+						   "Ansiolíticos", "Laxantes", "Neurotônico", "Psicoestimulantes", "Trato urinário", "Babosa/Aloe",
+						   "Calendula", "Garra-do-diabo", "Salgueiro-branco", "Arnica-brasileira/Arnica-da-serra", "Confrei",
+						   "Unha-de-gato", "Samambaia-americana", "Arnica", "Beladona", "Alcachofra", "Alcaçuz", "Camomila/Matricária/Maçanilha",
+						   "Espinheira-santa", "Boldo-do-chile", "Gengibre", "Quina-amarela", "Erva-baleeira", "Eucalipto", "Hera",
+						   "Agrião-d'água/Agrião", "Gerânio-africano", "Senega", "Tomilho", "Cardo-mariano", "Soja",
+						   "Hamamélis", "Melissa", "Maracujá", "Batata-de-purga", "Psyllium", "Cáscara-sagrada", "Sene", "Ginseng",
+						   "Guaraná", "Raiz de Ouro/Raiz Dourada", "Saw-palmetto", "Cranberry", "Decocção", "Maceração", "Infusão",
+						   "Hepatoprotetor", "Colerético", "Estimulante", "Antioxidante", "Antimicrobiano", "Anti-hipertensivo", "Digestivo",
+						   "Calmante", "Diurético", "Adstringente", "Antiulceroso", "Expectorante", "Carminativo",
+						   "Antiemético", "Broncodilatador", "Carminativo", "Emoliente", "Litolítico", "Propriedades laxativas", "Cicatrizante", "Sedativo",
+						   "Boldo Brasileiro", "Carqueja", "Dente de Leão", "Alecrim", "Alho", "Eucalipto", "Capim Limão",
+						   "Espinheira Santa", "Funcho", "Hortelã Pimenta", "Marcela", "Melissa", "Camomila", "Valeriana", "Malva", "Tansagem",
+						   "Propriedades Anti-inflamatórias", "Cavalinha", "Quebra Pedra", "Formas de preparo"
+						   ];
+
+        // Initialize the assistant and store sessionId
+		function initializeAssistant() {
+		  fetch('/api/initializer', {
+		    method: 'POST',
+		    headers: {
+		      'Content-Type': 'application/json'
+		    }
+		  })
+		  .then(response => response.text())
+		  .then(sessionId => {
+		    sessionStorage.setItem('sessionId', sessionId);
+		    processResponse('Primeiro contato');
+		
+		    setTimeout(() => {
+		      processResponse('Segundo contato');
+		    }, 1000);
+		  })
+		  .catch(error => console.error('Erro ao inicializar o assistente:', error));
+		}
+
+        window.onload = initializeAssistant;
+
+        sendButton.addEventListener('click', () => {
+            const messageText = messageInput.value.trim();
+            if (messageText !== '') {
+                sendMessage(messageText);
+                processResponse(messageText);
+                messageInput.value = '';
+            }
+        });
+
+        messageInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                const messageText = messageInput.value.trim();
+                if (messageText !== '') {
+                    sendMessage(messageText);
+                    processResponse(messageText);
+                    messageInput.value = '';
+                }
+            }
+        });
+
+        function sendMessage(text) {
+            const message = document.createElement('div');
+            message.classList.add('message', 'sent');
+            const textNode = document.createTextNode(text);
+            message.appendChild(textNode);
+            chatMessages.appendChild(message);
+			chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function processResponse(text) {
+            const sessionId = sessionStorage.getItem('sessionId');
+
+            fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: text, sessionId: sessionId })
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Destacar as palavras definidas na resposta
+                const highlightedData = highlightWords(data, boldWords);
+
+                // Criar a div para conter o ícone e o texto da resposta
+                const responseContainer = document.createElement('div');
+
+                // Criar o ícone de resposta
+                const responseIcon = document.createElement('img');
+                responseIcon.src = 'doris.png';
+                responseIcon.classList.add('response-icon');
+
+                // Criar o texto da resposta
+                const responseMessage = document.createElement('div');
+                responseMessage.classList.add('message', 'received');
+                responseMessage.innerHTML = highlightedData; // Inserir HTML com palavras destacadas
+
+                // Adiciona o ícone e o texto à div de conteúdo da resposta
+                responseContainer.appendChild(responseIcon);
+                responseContainer.appendChild(responseMessage);
+
+                // Adiciona a div de conteúdo da resposta à mensagem
+                chatMessages.appendChild(responseContainer);
+
+                // Remove event listeners antigos antes de adicionar novos
+                removeBoldWordListeners();
+                // Adiciona event listeners às palavras destacadas
+                addBoldWordListeners();
+				
+				chatMessages.scrollTop = chatMessages.scrollHeight;
+				
+            })
+            .catch(error => console.error('Erro ao enviar mensagem:', error));
+        }
+
+        function highlightWords(text, words) {
+            let highlightedText = text;
+            words.forEach(word => {
+                const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                highlightedText = highlightedText.replace(regex, `<span class="bold-word" style="font-weight: bold; cursor: pointer;">$&</span>`);
+            });
+            return highlightedText;
+        }
+
+        function addBoldWordListeners() {
+            const boldWordElements = document.querySelectorAll('.bold-word');
+            boldWordElements.forEach(element => {
+				element.addEventListener('click', boldWordClickHandler);
+				element.addEventListener('mouseover', handleHoverIn);
+				element.addEventListener('mouseout', handleHoverOut);
+            });
+        }
+
+		function handleHoverIn(event) {
+			event.target.style.color = '#B80000'; // Add underline on hover
+		}
+		
+		function handleHoverOut(event) {
+		  event.target.style.color = ''; // Remove underline on hover out
+		}
+		
+        function boldWordClickHandler(event) {
+            const word = event.target.textContent.trim();
+            sendMessage(word);
+            processResponse(word);
+        }
+
+        function removeBoldWordListeners() {
+            const boldWordElements = document.querySelectorAll('.bold-word');
+            boldWordElements.forEach(element => {
+                element.removeEventListener('click', boldWordClickHandler);
+            });
+        }
+    </script>
+
+</body>
+
+</html>

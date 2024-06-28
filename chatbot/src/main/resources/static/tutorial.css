@@ -1,0 +1,141 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: rgb(242, 252, 243);
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.btn-back {
+	position: absolute;
+	top: 50px;
+	left: 75px;
+}
+
+.icon-herbabot {
+	width: 150px;
+	padding-bottom: 20px;
+	animation: slide-up-down 3s ease infinite;
+}
+
+.icon-title {
+	font-size: 80px;
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	color: darkgreen;
+	font-weight: bold;
+	animation: slide-up 3s ease forwards;
+}
+
+.icon-subtitle {
+	font-size: 25px;
+	color: darkgreen;
+	animation: slide-up 3s ease forwards;
+}
+
+.card {
+	width: 900px;
+	height: 300px;
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 20px;
+	padding: 20px;
+	box-sizing: border-box;
+	opacity: 0;
+	animation: slide-up 1s ease forwards;
+}
+
+.button-container {
+    display: flex;
+     justify-content: space-between;
+}
+
+.index-button {
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 2px solid #212529;
+}
+
+.start-button {
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 2px solid #212529;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+
+.text {
+	color: white;
+	font-size: 23px;
+	text-align: center;
+}
+
+.custom-paginator {
+	background-color: rgb(242, 252, 243);
+}
+
+.title {
+    font-weight: bold;
+    font-size: 28px;
+    text-align: center;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+h1 {
+	line-height: 32px;
+	letter-spacing: normal;
+	margin: 0px 0px 16px;
+}
+
+@keyframes slide-up {
+	0% {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slide-up-down {
+    0% {
+        transform: translateY(0); /* Começa na posição inicial */
+    }
+    50% {
+        transform: translateY(-8px); /* Move para cima */
+    }
+    100% {
+        transform: translateY(0); /* Retorna à posição inicial */
+    }
+}
