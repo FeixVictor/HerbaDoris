@@ -96,8 +96,8 @@ body {
 .icon-herbabot {
     width: 130px;
     position: absolute;
-    top: calc(25%);
-    left: calc(10%);
+    top: 25%;
+    left: 9.8%; /* Ajuste para ficar alinhado à esquerda */
     padding-top: 10px;
     animation: slide-up-down 3s ease infinite;
 }
@@ -110,8 +110,8 @@ body {
     padding-top: 5px;
     animation: slide-up 3s ease forwards;
     position: absolute;
-    top: calc(46%);
-    left: calc(4%);
+    top: 46%;
+    left: 4%; /* Ajuste para ficar alinhado à esquerda */
     transform: translateX(-50%);
 }
 
@@ -120,8 +120,8 @@ body {
     color: darkgreen;
     animation: slide-up 3s ease forwards;
     position: absolute;
-    top: calc(52%);
-    left: calc(7%);
+    top: 52%;
+    left: 7%; /* Ajuste para ficar alinhado à esquerda */
     transform: translateX(-50%);
 }
 
@@ -136,8 +136,8 @@ body {
     margin-bottom: 20px;
     border: 2px solid #212529;
     position: absolute;
-    top: calc(61%);
-    left: calc(8.8%);
+    top: 61%;
+    left: 9%; /* Ajuste para ficar alinhado à esquerda */
 }
 
 .btn-home:hover {
@@ -148,6 +148,27 @@ h1 {
     line-height: 32px;
     letter-spacing: normal;
     margin: 0px 0px 16px;
+}
+
+.confirmation-buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.confirmation-buttons button {
+	padding: 10px 20px;
+	margin: 5px;
+	font-size: 16px;
+	border: 2px solid #212529;
+	border-radius: 15px;
+	background-color: #4CAF50;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.confirmation-buttons button:hover {
+  	background-color: #45a049;
 }
 
 @keyframes slide-up {
