@@ -62,17 +62,16 @@ body {
 }
 
 .input-container {
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    bottom: auto;
     width: 100%;
-    padding: 10px;
     background-color: #fff;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Sombra para separar do chat-container */
 }
 
 .input-container input[type="text"] {
     flex: 1;
-    padding: 8px;
+    padding: 1.4vh;
     border: none;
     border-radius: 20px;
     outline: none;
@@ -80,7 +79,7 @@ body {
 }
 
 .input-container button {
-    padding: 8px 15px;
+    padding: 3px 15px;
     border: none;
     border-radius: 20px;
     background-color: #4caf50;
@@ -196,3 +195,56 @@ h1 {
         transform: translateY(0);
     }
 }
+
+@media (max-width: 768px) {
+	.body{
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+	
+    .chat-container {
+		height: 70%;
+        width: 90%;
+        position: relative; /* Garante que o chat-container volte ao fluxo normal */
+        left: auto; /* Remove o ajuste horizontal */
+        margin-top: 20px; /* Adiciona espaço acima do chat-container */
+		margin-top: auto;
+		bottom: 1%;
+    }
+
+    .icon-herbabot {
+        width: 25%;
+        top: 2%; /* Remove o posicionamento absoluto */
+        left: auto; /* Remove o ajuste à esquerda */
+        padding-top: 0; /* Remove o padding top */
+    }
+
+    .icon-title {
+        font-size: 32px;
+        top: 15%; /* Ajusta a posição vertical */
+        left: 28%; /* Centraliza horizontalmente */
+        transform: translateX(-50%);
+    }
+
+    .icon-subtitle {
+        font-size: 16px;
+        top: 18.5%; /* Ajusta a posição vertical */
+        left: 26%; /* Centraliza horizontalmente */
+        transform: translateX(-50%);
+    }
+
+    .btn-home {
+        width: 80px;
+        padding: 6px 10px;
+        font-size: 10px;
+        top: 24%; /* Ajusta a posição vertical */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%);
+    }
+	
+	.input-container input[type="text"] {
+		width: calc(70%);
+		padding: 1.7vh;
+	}
+}
+
