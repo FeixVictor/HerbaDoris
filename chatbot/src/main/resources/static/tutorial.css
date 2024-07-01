@@ -139,3 +139,37 @@ h1 {
         transform: translateY(0); /* Retorna à posição inicial */
     }
 }
+
+@media (max-width: 768px) {
+	.btn-back {
+		position: absolute;
+		top: 2%;
+		left: 2%;
+	}
+	
+	.icon-herbabot {
+		width: 25%;
+	}
+
+	.icon-title {
+		font-size: 50px;
+	}
+
+	.icon-subtitle {
+		font-size: 20px;
+	}
+	
+	.card {
+		width: 90%;
+		height: 45%;
+	}
+	
+	.text {
+		font-size: 15px;
+	}
+
+	.title {
+	    font-size: 21px;
+	}
+	
+}

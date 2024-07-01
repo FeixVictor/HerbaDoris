@@ -207,29 +207,28 @@ h1 {
         width: 90%;
         position: relative; /* Garante que o chat-container volte ao fluxo normal */
         left: auto; /* Remove o ajuste horizontal */
-        margin-top: 20px; /* Adiciona espaço acima do chat-container */
-		margin-top: auto;
+        margin-top: 20%; /* Adiciona espaço acima do chat-container */
 		bottom: 1%;
     }
 
     .icon-herbabot {
         width: 25%;
-        top: 2%; /* Remove o posicionamento absoluto */
-        left: auto; /* Remove o ajuste à esquerda */
+        top: 3.5%; /* Remove o posicionamento absoluto */
+        left: 60%; /* Remove o ajuste à esquerda */
         padding-top: 0; /* Remove o padding top */
     }
 
     .icon-title {
         font-size: 32px;
-        top: 15%; /* Ajusta a posição vertical */
-        left: 28%; /* Centraliza horizontalmente */
+        top: 2%; /* Ajusta a posição vertical */
+        left: 7%; /* Centraliza horizontalmente */
         transform: translateX(-50%);
     }
 
     .icon-subtitle {
         font-size: 16px;
-        top: 18.5%; /* Ajusta a posição vertical */
-        left: 26%; /* Centraliza horizontalmente */
+        top: 5.5%; /* Ajusta a posição vertical */
+        left: 5%; /* Centraliza horizontalmente */
         transform: translateX(-50%);
     }
 
@@ -237,8 +236,8 @@ h1 {
         width: 80px;
         padding: 6px 10px;
         font-size: 10px;
-        top: 24%; /* Ajusta a posição vertical */
-        left: 50%; /* Centraliza horizontalmente */
+        top: 11%; /* Ajusta a posição vertical */
+        left: 28.5%; /* Centraliza horizontalmente */
         transform: translateX(-50%);
     }
 	
@@ -246,5 +245,12 @@ h1 {
 		width: calc(70%);
 		padding: 1.7vh;
 	}
+	
+	.response-icon {
+	    width: 15%;
+	    margin-right: 10px;
+	    float: left;
+	}
+	
 }
 

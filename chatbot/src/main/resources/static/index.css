@@ -15,12 +15,12 @@ body {
 
 .button-container {
 	text-align: center;
-	padding-top: 50px;
+	padding-top: 3%;
 }
 
 .icon-herbabot {
-	width: 150px;
-	padding-bottom: 20px;
+	width: 13%;
+	padding-bottom: 3%;
 	animation: slide-up-down 3s ease infinite;
 }
 
@@ -84,4 +84,23 @@ button:hover {
     100% {
         transform: translateY(0); /* Retorna à posição inicial */
     }
+}
+
+@media (max-width: 768px) {
+	.icon-herbabot {
+		width: 30%;
+	}
+
+	.icon-title {
+		font-size: 9vh;
+	}
+
+	.icon-subtitle {
+		font-size: 3vh;
+	}
+	
+	.button-container {
+		padding-top: 5%;
+	}
+	
 }
