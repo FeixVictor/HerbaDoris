@@ -19,5 +19,10 @@ public class NavigationController {
     public String tutorial() {
         return "tutorial";
     }
+    
+    @GetMapping("/referencias")
+    public String referencias() {
+    	return "referencias";
+    }
 	
 }

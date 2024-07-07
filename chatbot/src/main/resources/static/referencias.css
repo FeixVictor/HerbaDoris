@@ -40,8 +40,8 @@ body {
 }
 
 .card {
-	width: 60%;
-	height: 35%;
+	width: 90%;
+	height: 27%;
 	background-color: rgba(0, 0, 0, 0.4);
 	border-radius: 20px;
 	padding: 20px;
@@ -85,12 +85,8 @@ button:hover {
 
 .text {
 	color: white;
-	font-size: 23px;
-	text-align: center;
-}
-
-.custom-paginator {
-	background-color: rgb(242, 252, 243);
+	font-size: 15px;
+	text-align: left;
 }
 
 .title {
@@ -99,16 +95,6 @@ button:hover {
     text-align: center;
 }
 
-.pagination {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.pagination button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    cursor: pointer;
-}
 
 h1 {
 	line-height: 32px;
