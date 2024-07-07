@@ -101,76 +101,98 @@
 		}
 
 		function processResponse(text) {
-					const sessionId = sessionStorage.getItem('sessionId');
+		    const sessionId = sessionStorage.getItem('sessionId');
 
-					fetch('/api/chat', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({message: text, sessionId: sessionId})
-					})
-						.then(response => response.text())
-						.then(data => {
-							// Substituir "\n" por quebras de linha <br>
-							const formattedData = data.replace(/\n/g, '<br>');
+		    // Criar div para os três pontos animados
+		    const dotsContainer = document.createElement('div');
+		    dotsContainer.classList.add('typing-dots');
 
-							// Destacar as palavras definidas na resposta
-							const highlightedData = highlightWords(formattedData, boldWords);
+		    // Criar três elementos para os pontos
+		    for (let i = 0; i < 3; i++) {
+		        const dot = document.createElement('span');
+		        dot.textContent = '.';
+		        dotsContainer.appendChild(dot);
+		    }
 
-							// Criar a div para conter o ícone e o texto da resposta
-							const responseContainer = document.createElement('div');
+		    // Criar a mensagem de "digitação"
+		    const typingMessage = document.createElement('div');
+		    typingMessage.classList.add('message', 'received');
+		    typingMessage.appendChild(dotsContainer);
+		    chatMessages.appendChild(typingMessage);
+		    chatMessages.scrollTop = chatMessages.scrollHeight;
 
-							// Criar o ícone de resposta
-							const responseIcon = document.createElement('img');
-							responseIcon.src = 'doris.png';
-							responseIcon.classList.add('response-icon');
+		    fetch('/api/chat', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify({ message: text, sessionId: sessionId })
+		    })
+		    .then(response => response.text())
+		    .then(data => {
+		        // Substituir "\n" por quebras de linha <br>
+		        const formattedData = data.replace(/\n/g, '<br>');
 
-							// Criar o texto da resposta
-							const responseMessage = document.createElement('div');
-							responseMessage.classList.add('message', 'received');
-							responseMessage.innerHTML = highlightedData; // Inserir HTML com palavras destacadas
+		        // Destacar as palavras definidas na resposta
+		        const highlightedData = highlightWords(formattedData, boldWords);
 
-							// Adicionar estilo para quebras de linha <br>
-							responseMessage.style.whiteSpace = 'pre-line';
+		        // Criar a div para conter o ícone e o texto da resposta
+		        const responseContainer = document.createElement('div');
 
-							// Adicionar o ícone e o texto à div de conteúdo da resposta
-							responseContainer.appendChild(responseIcon);
-							responseContainer.appendChild(responseMessage);
+		        // Criar o ícone de resposta
+		        const responseIcon = document.createElement('img');
+		        responseIcon.src = 'doris.png';
+		        responseIcon.classList.add('response-icon');
 
-							// Adicionar a div de conteúdo da resposta à mensagem
-							chatMessages.appendChild(responseContainer);
+		        // Criar o texto da resposta
+		        const responseMessage = document.createElement('div');
+		        responseMessage.classList.add('message', 'received');
+		        responseMessage.innerHTML = highlightedData; // Inserir HTML com palavras destacadas
 
-							// Verificar se a resposta contém "Sim/Não" para adicionar os botões correspondentes
-							if (data.includes("Sim/Não")) {
-								const confirmationButtons = document.createElement('div');
-								                        confirmationButtons.classList.add('confirmation-buttons');
+		        // Adicionar estilo para quebras de linha <br>
+		        responseMessage.style.whiteSpace = 'pre-line';
 
-								                        const buttonSim = document.createElement('button');
-								                        buttonSim.textContent = 'Sim';
-								                        buttonSim.classList.add('confirmation-button');
-								                        buttonSim.addEventListener('click', () => confirmationButtonClick('Sim'));
+		        // Adicionar o ícone e o texto à div de conteúdo da resposta
+		        responseContainer.appendChild(responseIcon);
+		        responseContainer.appendChild(responseMessage);
 
-								                        const buttonNao = document.createElement('button');
-								                        buttonNao.textContent = 'Não';
-								                        buttonNao.classList.add('confirmation-button');
-								                        buttonNao.addEventListener('click', () => confirmationButtonClick('Não'));
+		        // Remover a mensagem de "digitação"
+		        chatMessages.removeChild(typingMessage);
 
-								                        confirmationButtons.appendChild(buttonSim);
-								confirmationButtons.appendChild(buttonNao);
+		        // Adicionar a div de conteúdo da resposta à mensagem
+		        chatMessages.appendChild(responseContainer);
 
-								chatMessages.appendChild(confirmationButtons);
-							}
+		        // Verificar se a resposta contém "Sim/Não" para adicionar os botões correspondentes
+		        if (data.includes("Sim/Não")) {
+		            const confirmationButtons = document.createElement('div');
+		            confirmationButtons.classList.add('confirmation-buttons');
 
-							// Remove event listeners antigos antes de adicionar novos
-							removeBoldWordListeners();
-							// Adicionar event listeners às palavras destacadas
-							addBoldWordListeners();
+		            const buttonSim = document.createElement('button');
+		            buttonSim.textContent = 'Sim';
+		            buttonSim.classList.add('confirmation-button');
+		            buttonSim.addEventListener('click', () => confirmationButtonClick('Sim'));
 
-							chatMessages.scrollTop = chatMessages.scrollHeight;
-						})
-						.catch(error => console.error('Erro ao enviar mensagem:', error));
-				}
+		            const buttonNao = document.createElement('button');
+		            buttonNao.textContent = 'Não';
+		            buttonNao.classList.add('confirmation-button');
+		            buttonNao.addEventListener('click', () => confirmationButtonClick('Não'));
+
+		            confirmationButtons.appendChild(buttonSim);
+		            confirmationButtons.appendChild(buttonNao);
+
+		            chatMessages.appendChild(confirmationButtons);
+		        }
+
+		        // Remove event listeners antigos antes de adicionar novos
+		        removeBoldWordListeners();
+		        // Adicionar event listeners às palavras destacadas
+		        addBoldWordListeners();
+
+		        chatMessages.scrollTop = chatMessages.scrollHeight;
+		    })
+		    .catch(error => console.error('Erro ao enviar mensagem:', error));
+		}
+
 
 		function highlightWords(text, words) {
 			let highlightedText = text;
